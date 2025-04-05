@@ -2,7 +2,7 @@
 
 Build a centos 6.7 docker images with upgraded toolchain in order to support vscode remote development.
 
-Advice from Microsoft: `https://code.visualstudio.com/docs/remote/faq#_can-i-run-vs-code-server-on-older-linux-distributions
+Advice from Microsoft: `https://code.visualstudio.com/docs/remote/faq#_can-i-run-vs-code-server-on-older-linux-distributions`
 
 This method should not only work with centos 6.7, but also work with ubuntu 14.04, 18.04, etc., although I didn't test it.
 
