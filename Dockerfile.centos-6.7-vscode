@@ -16,11 +16,17 @@ RUN yum clean all
 
 # Install new version gdb
 ADD ./files/gdb-7.9.1-x86_64-with-python3.tar.gz /usr/local/
+
 # Install patchelf
 ADD ./files/patchelf-0.18.0-x86_64.tar.gz /usr/local/
+
+# Install new version cmake
+# 3.27.9 was the last official cmake prebuilt binary release with support for centos 6
+ADD ./files/cmake-3.27.9-linux-x86_64.tar.gz /opt/
+ENV PATH=/opt/cmake-3.27.9-linux-x86_64/bin:$PATH
+
 # Install new toolchain file
 ADD ./files/toolchain-x86_64-gcc-8.5.0-glibc-2.28.tar.xz /opt/
-
 # ENVs for vscode server to using toolchain
 ENV VSCODE_SERVER_CUSTOM_GLIBC_LINKER=/opt/toolchain-x86_64-gcc-8.5.0-glibc-2.28/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib/ld-2.28.so
 ENV VSCODE_SERVER_CUSTOM_GLIBC_PATH=/opt/toolchain-x86_64-gcc-8.5.0-glibc-2.28/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib
