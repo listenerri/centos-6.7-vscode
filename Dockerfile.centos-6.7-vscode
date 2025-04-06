@@ -5,17 +5,20 @@ RUN sed -e "s|^mirrorlist=|#mirrorlist=|g" \
         -e "s|^#baseurl=http://mirror.centos.org/centos/\$releasever|baseurl=https://mirrors.aliyun.com/centos-vault/6.7|g" \
         -i.bak \
         /etc/yum.repos.d/CentOS-*.repo
-# Using aliyun EPEL
+# Using aliyun EPEL repo
 ADD ./files/epel.repo /etc/yum.repos.d/epel.repo
+# Using aliyun IUS repo
+ADD ./files/ius-archive.repo /etc/yum.repos.d/ius-archive.repo
 # Update local repo cache
 RUN yum makecache
 # Install pkgs
-RUN yum install -y socat file wget tar xz vim which cmake gcc gcc-c++ gdb gdb-gdbserver python34-devel glibc.i686 zlib.i686
+RUN yum install -y socat file wget tar xz vim which git224 gcc gcc-c++ python36u-devel glibc.i686 zlib.i686
 # Clean local repo cache
 RUN yum clean all
 
 # Install new version gdb
-ADD ./files/gdb-7.9.1-x86_64-with-python3.tar.gz /usr/local/
+ADD ./files/gdb-7.9.1-x86_64-with-python36.tar.xz /opt/
+ENV PATH=/opt/gdb-7.9.1-x86_64-with-python36/bin:$PATH
 
 # Install patchelf
 ADD ./files/patchelf-0.18.0-x86_64.tar.gz /usr/local/

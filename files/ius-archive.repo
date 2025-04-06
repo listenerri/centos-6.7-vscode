@@ -1,0 +1,23 @@
+[ius-archive]
+name = IUS for Enterprise Linux 6 - Archive - $basearch
+baseurl = http://mirrors.aliyun.com/ius/archive/6/$basearch/
+enabled = 1
+repo_gpgcheck = 0
+gpgcheck = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-6
+
+[ius-archive-debuginfo]
+name = IUS for Enterprise Linux 6 - Archive - $basearch - Debug
+baseurl = http://mirrors.aliyun.com/ius/archive/6/$basearch/debug/
+enabled = 0
+repo_gpgcheck = 0
+gpgcheck = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-6
+
+[ius-archive-source]
+name = IUS for Enterprise Linux 6 - Archive - Source
+baseurl = http://mirrors.aliyun.com/ius/archive/6/src/
+enabled = 0
+repo_gpgcheck = 0
+gpgcheck = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-6
