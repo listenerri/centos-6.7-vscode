@@ -35,9 +35,14 @@ ENV VSCODE_SERVER_CUSTOM_GLIBC_LINKER=/opt/toolchain-x86_64-gcc-8.5.0-glibc-2.28
 ENV VSCODE_SERVER_CUSTOM_GLIBC_PATH=/opt/toolchain-x86_64-gcc-8.5.0-glibc-2.28/x86_64-linux-gnu/x86_64-linux-gnu/sysroot/lib
 ENV VSCODE_SERVER_PATCHELF_PATH=/usr/local/bin/patchelf
 
-# Do not use root by default
-# Specify another user id when build: docker build --build-arg UID=$(id -u) ...
-ARG UID=1000
-RUN useradd -m -u ${UID} -G wheel -s /bin/bash builder
-USER builder
+# Add another user
+# Create current host user in container when build:
+# docker build --build-arg USER_NAME=$(whoami) --build-arg USER_UID=$(id -u)  --build-arg USER_GID=$(id -g) ...
+ARG USER_NAME=builder
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN groupadd --gid $USER_GID $USER_NAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USER_NAME
 
+# Change default user
+User $USER_NAME
