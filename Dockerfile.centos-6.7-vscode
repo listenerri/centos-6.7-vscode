@@ -12,9 +12,10 @@ ADD ./files/ius-archive.repo /etc/yum.repos.d/ius-archive.repo
 # Update local repo cache
 RUN yum makecache
 # Install pkgs
+RUN yum update -y
 RUN yum install -y socat file wget tar xz vim which git224 gcc gcc-c++ python36u-devel glibc.i686 zlib.i686
 # Clean local repo cache
-RUN yum clean all
+#RUN yum clean all
 
 # Install new version gdb
 ADD ./files/gdb-7.9.1-x86_64-with-python36.tar.xz /opt/
