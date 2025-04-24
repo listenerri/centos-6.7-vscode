@@ -22,7 +22,7 @@ docker build -t toolchain-builder -f Dockerfile.build-toolchain .
 docker run --rm -it -d --name mytoolchain toolchain-builder bash
 docker exec -it mytoolchain bash -c 'cd /home/ubuntu && tar Jcf toolchain-x86_64-gcc-8.5.0-glibc-2.28.tar.xz toolchain-x86_64-gcc-8.5.0-glibc-2.28/x86_64-linux-gnu'
 docker cp mytoolchain:/home/ubuntu/toolchain-x86_64-gcc-8.5.0-glibc-2.28.tar.xz ./files/
-docker stop toolchain
+docker stop mytoolchain
 ```
 
 The toolchain file has been saved at ./files/toolchain-x86_64-gcc-8.5.0-glibc-2.28.tar.xz on host.
@@ -57,3 +57,9 @@ docker ps -a
 
 Start vscode and open `Remote Explore` from left side bar, switch drop down menu to `Dev Containers`, right click on `centos-6.7-vscode-test` container and click `Attach in Current Window`
 
+
+## Known issues
+
+### fetch Error: getaddrinfo ENOTFOUND
+
+patchelf caused an exception in the node program of vscode server and failed to execute dns
