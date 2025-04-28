@@ -46,4 +46,5 @@ RUN groupadd --gid $USER_GID $USER_NAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USER_NAME
 
 # Change default user
-User $USER_NAME
+# NOTE: Change default user to non root user caused to Aliyun codeup flow run error
+#User $USER_NAME
